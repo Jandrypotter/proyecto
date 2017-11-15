@@ -42,6 +42,8 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
+        contact_email: alejandro.catala@tphmarketing.com 
+        
 # Doctrine Configuration
 doctrine:
     dbal:
