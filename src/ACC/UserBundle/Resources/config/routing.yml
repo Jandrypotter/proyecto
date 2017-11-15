@@ -19,6 +19,11 @@ acc_user_edit:
     path:     /user/edit/{id}
     defaults: { _controller: ACCUserBundle:User:edit }
 
+acc_user_update:
+    path:     /user/update/{id}
+    defaults: { _controller: ACCUserBundle:User:update }
+    methods: [POST, PUT]
+
 acc_user_view:
     path:     /user/view/{id}
     defaults: { _controller: ACCUserBundle:User:view }
@@ -26,10 +31,18 @@ acc_user_view:
 acc_user_delete:
     path:     /user/delete/{id}
     defaults: { _controller: ACCUserBundle:User:delete }
+    methods: [POST, DELETE]
 
 acc_user_redirect_add:
     path:     /user/create
     defaults: 
         _controller: ACCUserBundle:User:add
         path: /user/add
+        permanent: true
+
+acc_user_redirect_edit:
+    path:     /user/update{id}
+    defaults: 
+        _controller: ACCUserBundle:User:edit
+        path: /user/edit/{id}
         permanent: true

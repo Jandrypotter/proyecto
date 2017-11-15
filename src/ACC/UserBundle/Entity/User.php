@@ -63,7 +63,6 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\NotBlank()
      */
     private $password;
 
@@ -71,7 +70,6 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="role", type="string", columnDefinition="ENUM('ROLE_ADMIN', 'ROLE_USER')", length=50)
-     * @Assert\NotBlank()
      * @Assert\Choice(choices = {"ROLE_ADMIN", "ROLE_USER"})
      */
     private $role;
