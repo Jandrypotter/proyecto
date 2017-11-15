@@ -1,0 +1,3 @@
+alejandrito._homepage:
+    path:     /
+    defaults: { _controller: Alejandrito_Bundle:Default:index }
