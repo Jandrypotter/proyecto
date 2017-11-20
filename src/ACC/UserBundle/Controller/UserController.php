@@ -1,5 +1,7 @@
 <?php
+
 namespace ACC\UserBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -7,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormError;
 use ACC\UserBundle\Entity\User;
 use ACC\UserBundle\Form\UserType;
+
 class UserController extends Controller
 {
     public function homeAction()
@@ -51,7 +54,7 @@ class UserController extends Controller
     
     private function createCreateForm(User $entity)
     {
-        $form = $this->createForm(UserType::class, $entity, array(
+        $form = $this->createForm(new UserType(), $entity, array(
                 'action' => $this->generateUrl('acc_user_create'),
                 'method' => 'POST'
             ));
@@ -93,6 +96,7 @@ class UserController extends Controller
                 $errorMessage = new FormError($errorList[0]->getMessage());
                 $form->get('password')->addError($errorMessage);
             }
+
         }
         
         return $this->render('ACCUserBundle:User:add.html.twig', array('form' => $form->createView()));
@@ -117,7 +121,7 @@ class UserController extends Controller
     
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(UserType::class, $entity, array('action' => $this->generateUrl('acc_user_update', array('id' => $entity->getId())), 'method' => 'PUT'));
+        $form = $this->createForm(new UserType(), $entity, array('action' => $this->generateUrl('acc_user_update', array('id' => $entity->getId())), 'method' => 'PUT'));
         
         return $form;
     }
@@ -127,6 +131,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $user = $em->getRepository('ACCUserBundle:User')->find($id);
+
         if(!$user)
         {
             $messageException = $this->get('translator')->trans('User not found.');
@@ -155,6 +160,7 @@ class UserController extends Controller
             {
                 $user->setIsActive(1);
             }
+
             $em->flush();
             
             $successMessage = $this->get('translator')->trans('The user has been modified.');
@@ -228,6 +234,7 @@ class UserController extends Controller
             }
             
             $res = $this->deleteUser($user->getRole(), $em, $user);
+
             $this->addFlash($res['alert'], $res['message']);
             return $this->redirectToRoute('acc_user_index');            
         }
@@ -261,7 +268,4 @@ class UserController extends Controller
             ->setMethod($method)
             ->getForm();
     }
-
-
-
 }

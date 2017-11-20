@@ -1,0 +1,24 @@
+acc_user_user:
+    resource: "@ACCUserBundle/Resources/config/routes/user.yml"
+    prefix:   /user
+
+acc_task_task:
+    resource: "@ACCUserBundle/Resources/config/routes/task.yml"
+    prefix:   /task
+
+# Autentication
+
+acc_user_homepage:
+    path:     /
+    defaults: { _controller: ACCUserBundle:User:home }
+
+acc_user_login:
+    path:     /login
+    defaults: { _controller: ACCUserBundle:Security:login }
+
+acc_user_login_check:
+    path:     /login_check
+    defaults: { _controller: ACCUserBundle:Security:loginCheck }
+
+acc_user_logout:
+    path:     /logout
